@@ -1,0 +1,1 @@
+0 * * * * PYTHONPATH=/home/username/tele_bot/ python3 /home/username/tele_bot/echo/notify.py

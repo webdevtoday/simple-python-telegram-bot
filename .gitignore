@@ -1,6 +1,7 @@
 .env
 .idea
 *.pyc
+bot_echo.service
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
