@@ -1,2 +1,4 @@
 TG_TOKEN = ""
 TG_API_URL = None
+
+COIN_MARKET_CAP_API_KEY = ""
