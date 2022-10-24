@@ -1,4 +1,6 @@
 TG_TOKEN = ""
 TG_API_URL = None
 
+NOTIFY_USER_ID = ""
+
 COIN_MARKET_CAP_API_KEY = ""
