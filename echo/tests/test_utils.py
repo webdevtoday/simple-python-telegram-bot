@@ -4,6 +4,8 @@ from echo.utils import get_filename
 
 
 class UtilsTestCase(TestCase):
+    """ Tests
+    """
 
     def test_filename_prefix(self):
         r = get_filename()
