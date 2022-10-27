@@ -2,6 +2,10 @@ import os
 import random
 import time
 
+from logging import getLogger
+
+logger = getLogger(__name__)
+
 
 def mkdir(path):
     """ Create a new folder or make sure that it already exists
@@ -24,3 +28,17 @@ def get_filename():
         int(time.time()), random.randint(1, 100))
     print("Save to file `{}`".format(filename))
     return filename
+
+
+def debug_requests(f):
+    """ Decorator for debugging telegram events
+    """
+    def inner(*args, **kwargs):
+        try:
+            logger.info("Calling a function {}".format(f.__name__))
+            return f(*args, **kwargs)
+        except Exception:
+            logger.exception("Error in handler {}".format(f.__name__))
+            raise
+
+    return inner

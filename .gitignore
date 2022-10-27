@@ -2,6 +2,7 @@
 .idea
 *.pyc
 bot_echo.service
+.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
