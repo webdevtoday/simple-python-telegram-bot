@@ -1,7 +1,8 @@
+bot_echo.service
+archive_bot/questionnaire.db
 .env
 .idea
 *.pyc
-bot_echo.service
 .vscode/
 
 # Byte-compiled / optimized / DLL files
