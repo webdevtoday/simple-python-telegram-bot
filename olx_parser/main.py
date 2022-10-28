@@ -104,7 +104,6 @@ class OLXParser:
         # Select a block with the date of placement of the ad
         date = None
         date_block = item.select_one('p.css-p6wsjo-Text.eu5v0x0')
-        # TODO: parse date_block to format date 2022-20-10 10:50:00
         date_block = date_block.get_text().strip()
         if date_block:
             date = self.parse_date(item=date_block)
