@@ -146,10 +146,7 @@ class OLXParser:
 
 def main():
     p = OLXParser()
-    # p.parse_all()
-
-    # p.get_pagination_limit()
-    p.get_blocks()
+    p.parse_all()
 
 
 if __name__ == '__main__':
