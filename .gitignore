@@ -4,6 +4,8 @@ archive_bot/questionnaire.db
 .idea
 *.pyc
 .vscode/
+myvenv
+.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

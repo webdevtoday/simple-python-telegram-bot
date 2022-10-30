@@ -3,3 +3,4 @@ python-telegram-bot==20.0a4
 xmltodict==0.13.0
 beautifulsoup4==4.11.1
 lxml==4.9.1
+Django==4.1.2
