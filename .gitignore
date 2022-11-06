@@ -1,3 +1,4 @@
+apis/*.json
 bot_echo.service
 archive_bot/questionnaire.db
 .env

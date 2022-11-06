@@ -33,10 +33,10 @@ def get_filename():
 def debug_requests(f):
     """ Decorator for debugging telegram events
     """
-    def inner(*args, **kwargs):
+    async def inner(*args, **kwargs):
         try:
             logger.info("Calling a function {}".format(f.__name__))
-            return f(*args, **kwargs)
+            return await f(*args, **kwargs)
         except Exception:
             logger.exception("Error in handler {}".format(f.__name__))
             raise
