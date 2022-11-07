@@ -35,7 +35,7 @@ async def inline_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     # List of similar coin names
     results = []
-    names = search.parse_query(text=query)
+    names = search.parse_query(text=query)[0:50]
     prices = search.get_prices(names=names)
     for i, (name, price) in enumerate(prices):
         results.append(
