@@ -4,3 +4,5 @@ xmltodict==0.13.0
 beautifulsoup4==4.11.1
 lxml==4.9.1
 Django==4.1.2
+sentry-sdk==1.14.0
+Pillow==9.4.0

@@ -1,10 +1,11 @@
-import os
+import functools
 import random
 import time
+import os
+from io import BytesIO
 
-from logging import getLogger
-
-logger = getLogger(__name__)
+import sentry_sdk
+from PIL import Image
 
 
 def mkdir(path):
@@ -26,19 +27,44 @@ def mkdir(path):
 def get_filename():
     filename = "result_{}_{}.png".format(
         int(time.time()), random.randint(1, 100))
-    print("Save to file `{}`".format(filename))
     return filename
 
 
-def debug_requests(f):
-    """ Decorator for debugging telegram events
+def logger_factory(logger):
+    """ The import of the function occurs before the loading of the logging config.
+        Therefore, you must explicitly specify in which logger we want to write.
     """
-    async def inner(*args, **kwargs):
-        try:
-            logger.info("Calling a function {}".format(f.__name__))
-            return await f(*args, **kwargs)
-        except Exception:
-            logger.exception("Error in handler {}".format(f.__name__))
-            raise
+    def debug_requests(f):
 
-    return inner
+        @functools.wraps(f)
+        async def inner(*args, **kwargs):
+
+            try:
+                logger.debug('Calling a function `{}`'.format(f.__name__))
+                return await f(*args, **kwargs)
+            except Exception as e:
+                logger.exception(
+                    'An error in the function `{}`'.format(f.__name__))
+                sentry_sdk.capture_exception(error=e)
+                raise
+
+        return inner
+
+    return debug_requests
+
+
+def save_image(img: Image, img_format=None, quality=85):
+    """ Save the picture from the stream into a variable for further sending over the network
+    """
+    if img_format is None:
+        img_format = img.format
+    output_stream = BytesIO()
+    output_stream.name = 'image.jpeg'
+    # on Ubuntu for some reason there is no jpg, but there is a jpeg
+    if img.format == 'JPEG':
+        img.save(output_stream, img_format, quality=quality,
+                 optimize=True, progressive=True)
+    else:
+        img.convert('RGB').save(output_stream, format=img_format)
+    output_stream.seek(0)
+    return output_stream
